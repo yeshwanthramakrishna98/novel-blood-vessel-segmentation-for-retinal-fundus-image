@@ -15,11 +15,10 @@ clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
 
 cl1 = clahe.apply(img_grey)
 
-cv2.imshow("o21",fgmask)
 erosion = cv2.erode(cl1,kernel,iterations = 1)
 erosion=cv2.GaussianBlur(erosion,(5,5),0)
-#opening = cv2.morphologyEx(cl1, cv2.MORPH_OPEN, kernel)
-#cv2.imshow("op2",erosion)
+opening = cv2.morphologyEx(cl1, cv2.MORPH_OPEN, kernel)
+cv2.imshow("op2",erosion)
 #cv2.normalize(opening, opening, 0, 255, cv2.NORM_MINMAX)
 #opening=(255-opening)
 x=cv2.subtract(cl1,erosion)
