@@ -156,14 +156,17 @@ def segment(image):
     
 if __name__ == "__main__": 
     i=1
-    for img in glob.glob("DRIVE/training/images/*.tif"):
+    for img,man in zip(glob.glob("DRIVE/test/images/*.tif"),glob.glob("DRIVE/test/test2/*.tiff")):
         g = cv2.imread(img)
-        #now we haveto read the manual image and compare using calC_accuracy(result, label) function
-        path = 'DRIVE/training/modified/'
+        h = cv2.imread(man)
+        path = 'DRIVE/test/modified/'
         image=segment(g)
+        cv2.imshow("manual",h)
+        #j=calC_accuracy(image,h)
+        #print (j)
+        cv2.imshow("image",image)
         cv2.imwrite(str(path)+str(i)+'.tiff',image)
         i=i+1        
-        cv2.waitKey(0)
-    
+        cv2.waitKey(0)    
     
     
