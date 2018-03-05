@@ -159,6 +159,7 @@ if __name__ == "__main__":
     for img,man in zip(glob.glob("DRIVE/test/images/*.tif"),glob.glob("DRIVE/test/test2/*.tiff")):
         g = cv2.imread(img)
         h = cv2.imread(man)
+	h = cv2.cvtColor(h, cv2.COLOR_BGR2GRAY)
         path = 'DRIVE/test/modified/'
         image=segment(g)
         cv2.imshow("manual",h)
