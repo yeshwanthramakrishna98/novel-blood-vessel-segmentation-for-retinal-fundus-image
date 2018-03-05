@@ -97,6 +97,12 @@ def extract_bv(image):
 if __name__ == "__main__":	
     image=cv2.imread('02_test.tif')
     p=extract_bv(image)
+    h, w = p.shape[:2]
+    mask = np.zeros((h+2, w+2), np.uint8)
+ 
+    # Floodfill from point (0, 0)
+    cv2.floodFill(p, mask, (270,2), 0);
+        
     cv2.imshow("p",p)
     res=cv2.imread("02_manual1.tiff")
 
