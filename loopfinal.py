@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import cv2
 import numpy as np
 import os
@@ -99,6 +98,12 @@ if __name__ == "__main__":
   for img,man in zip(glob.glob("DRIVE/test/images/*.tif"),glob.glob("DRIVE/test/test1/*.tiff")):
     image=cv2.imread(img)
     p=extract_bv(image)
+    h, w = p.shape[:2]
+    mask = np.zeros((h+2, w+2), np.uint8)
+ 
+    
+    cv2.floodFill(p, mask, (270,2), 0);
+
     cv2.imshow("p",p)
     path = 'DRIVE/test/modified/'
     cv2.imwrite(str(path)+str(i)+'.tiff',p)
