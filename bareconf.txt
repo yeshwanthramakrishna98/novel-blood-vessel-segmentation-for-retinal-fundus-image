@@ -1,4 +1,6 @@
 
+
+
 %% bare_conf.tex
 %% V1.4b
 %% 2015/08/26
@@ -110,6 +112,9 @@
 
 
 
+\usepackage{amssymb}
+\usepackage{graphicx}
+
 
 
 
@@ -159,7 +164,7 @@
 
 % *** MATH PACKAGES ***
 %
-%\usepackage{amsmath}
+\usepackage{amsmath}
 % A popular package from the American Mathematical Society that provides
 % many useful and powerful commands for dealing with mathematics.
 %
@@ -299,8 +304,6 @@
 % Basically, \url{my_url_here}.
 
 
-
-
 % *** Do not adjust lengths that control margins, column widths, etc. ***
 % *** Do not use packages that alter fonts (such as pslatex).         ***
 % There should be no need to do such things with IEEEtran.cls V1.6 and later.
@@ -320,7 +323,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{OUR FUCKING PROJECT}
+\title{OUR PROJECT}
 
 
 % author names and affiliations
@@ -328,19 +331,19 @@
 % affiliations
 \author{\IEEEauthorblockN{Avinash Devadhar S}
 \IEEEauthorblockA{15co210\\Department of Computer Engineering\\
-NITk
-Surathkal , Manglore 575025\\
+NIT
+Surathkal , Mangalore 575025\\
 Email: asdevadhar@gmail.com}
 \and
 \IEEEauthorblockN{Tushar Bhooshan Suvarna\\ 15co251}
 \IEEEauthorblockA{Department of Computer Engineering\\
-NITk Surathkal , Manglore 575025\\
+NITk Surathkal , Mangalore 575025\\
 Email: tusharbs1997@gmail.com}
 \and
 \IEEEauthorblockN{Yeshwanth Ramakrishna}
 \IEEEauthorblockA{15co154\\Department of Computer Engineering\\
 NITk
-Surathkal , Manglore 575025\\
+Surathkal , Mangalore 575025\\
 Email:yeshwanthr98@gmail.com}}
 
 % conference papers do not typically use \thanks and this command
@@ -402,23 +405,161 @@ The retina is unique in the body for allowing easy observation of blood vessels 
 
 \section{Introduction}
 % no \IEEEPARstart
-This demo file is intended to serve as a ``starter file''
-for IEEE conference papers produced under \LaTeX\ using
-IEEEtran.cls version 1.8b and later.
+At Present, the advances on digital imaging systems offer very high-resolution images that can be used in several areas of medicine.In order to build a human disease feature database for the service of automated diagnosis, it is an important step to detect the blood vessels in the retina image processing as the eye is a window to the retinal vascular system which is uniquely accessible for the non-invasive, in vivo study of a complete vascular bed in humans. The detection and measurement of blood vessels can be used to quantify the severity of disease or as part of the process of automated diagnosis of diseases.
+
+Diabetic retinopathy is one of the diseases that can be detected using retinal blood vessel segmentation. Diabetic retinopathy occurs due to leakage of small vessels in retina related to prolonged period of hyperglycemia. It can be classified into two stages: Nonproliferative retinopathy and proliferative retinopathy. Nonproliferative retinopathy is the early stage of the disease which includes hemorrhage and exudates. Hemorrhage results from capillaries bleeding while exudates results from the accumulation of proteins and lipids in the retina. Proliferative retinopathy is the advance stage of the disease that new abnormal vessels, called neovascularization are grown in the retina. This can lead to problems in vision. There are many methods for the segmentation of blood vessels, some of them are Image Line Cross Section(ILCS),Edge Enhancement and Edge Detection(EEED), Modified Match Filtering(MMF) , Continuation Algorithm(CA).
+
+In this paper we present the idea of segmenting the blood vessel using morphological and contour operations.
 % You must have at least 2 lines in the paragraph with the drop letter
 % (should never be an issue)
-I wish you the best of success.
+%I wish you the best of success.
 
-\hfill mds
+%2. Literature Review
+%3. Methodology
+
+
+%\hfill mds
  
-\hfill August 26, 2015
+%\hfill August 26, 2015
 
-\subsection{Subsection Heading Here}
-Subsection text here.
+\section{Literature review}
+As diabetes is common in many countries especially like India, there are almost 62 million people affected by this.In recent years there has been a lot of research going on this field to detect them in the early stages and preventing it as early as possible. 
+
+The diagnosis of the fundus image is widely used in many medical diagnosis and Image segmentation of fundus image is the important in identifying the retinal pathology, these analysis helps opthamologists to identify the retinal disease. The changes in the blood vessel and the retinal pathology can be identified by first segmenting the retinal
+vessels and by proper analysis of the retinal blood vessels.
+
+Automatic segmentation of retinal vessels is important for detection of early diseases.There are various methods for segmenting the retinal vessels in fundus image, some of them are:
+
+Vessel segmentation using Max-Tree to represent the image based on its gray level afterwards the filtering process is done using branches filtering approach in which the tree branches is selected based on the elongation attribute of the nodes for which the selection starts from the leaf nodes.
+
+Another segmentation process includes segmentation of retinal vessels using the Mumford-Shah model and Gabor wavelet filter. Extraction of retinal blood vessels is done using Weiner filter and Morphological operations like opening and closing.
+
+Retinal segmentation based on reinforcement local description . A novel line set feature first captures local shape information about vessel by employing length prior of vessels. After that, local intensity feature is calculated for each pixel and morphological gradient feature is extracted for enhancing local edge of smaller vessel, finally line set based feature, local intensity feature and morphological gradient feature are combined to obtain the reinforcement local description.
+
+In this paper we present the idea of segmentation of retinal blood vessel using morphological operations and contour algorithm. The fundus image used in this research is obtained from Digital Retinal Images for Vessel Extraction(DRIVE dataset). Input to segmentation process is color fundus image and RGB image is converted to green channel image and morphological operations is used, lastly contour algorithm is applied on the image to get segmented image with accuracy averaging around 95\%.
 
 
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
+\section{Methodology}
+\subsection{Pre-processing}
+%Subsection text here.
+Red-green-blue (RGB) fundus images usually come up
+with low contrast and noisy background. Therefore, blood
+vessels, especially the thin ones, need to be enhanced to get
+new modified images that are more suitable for the
+segmentation process [2]. The pre-processing performs
+global vessel enhancement and morphological methodology
+with image denoising
+\\\\
+%\begin{enumerate}
+%\item
+\textit{1) Green channel extraction:}\\
+The green channel of the original image has more details
+than the red and blue channels. Thus, it is better to have it as
+a reference image for the segmentation process. Red and
+blue channels do not provide clear blood vessels due to the
+low contrast and poor dynamic range, respectively[3]
+\\
+\begin{figure}[]
+\includegraphics[width= \linewidth]{4.PNG}
+\end{figure}
+\\ 
+\textit{2) Green channel complement and adaptive histogram
+equalization:}\\
+In this study, adaptive histogram equalization (AHE) is
+used since it tends to enhance the low contrast of an image
+by uniformly spreading the image intensity levels. Instead of
+processing the entire image data, it processes small regions,
+individually[4].The AHE equalizes intensity levels by
+making vessels, including the small ones, clearer and whiter
+As a result, the image has a smoothed background.%
+\\ 
+
+  
+\subsection{Morphological operations}
+
+Morphological methodologies are collection of techniques
+used in extracting components of an image [5]. The most
+basic morphological operations defined are erosion and
+dilation. Assuming the object X and the structuring element
+B are represented as sets in 2D Euclidian space. 
+Let Bx denote the translation of B so that its origin is located at x. Then the erosion of X by B is defined as the set of all points x such that Bx is included in X, that is,
+\[X \bigodot B = \{x:B_{x} \subseteq X\}\] 
+In the same way, the dilation of X by B is described as the
+set of all points x such that Bx hits X that is, they have a
+nonempty intersection 
+\[X\bigoplus B = \{x:B_{x} \bigcap X \neq \emptyset \}  \]
+
+Erosion is a shrinking operation, whereas dilation is an
+expansion operation. The erosion followed by dilation is
+called opening. It is defined in Eq.3 below. 
+\[X_{b} = (X \bigodot B)\bigoplus B \]
+
+Similarly , The dilation followed by erosion is
+called closing. It is defined in Eq.4 below.
+\[X_{b} = (X \bigoplus B) \bigodot B \]
+
+The blood vessels are suppressed by the successive
+‘opening’ and 'closing' operation with a structuring element that is nonflat and ball-shaped, to create a background.This background is used to achieve a normalized image.The created background is subtracted from the
+result of the adaptive histogram equalizer, to obtain a
+normalized retinal image.
+Adaptive histogram equalization is  applied to the resultant image.
+\\
+\begin{figure}
+\includegraphics[width= \linewidth]{3.png}
+\caption{Series of opening and closing operations and subtraction}
+\end{figure}
+
+
+\subsection{Removal of non-connected components}
+Contour tracing is one of many  techniques performed on digital images in order to extract information about their general shape.\\
+Contour tracing is done to group the various connected components in the image, this data is again processed to check whether the components are blood vessels or whether it is noise ,and also non-connected components are removed.\\
+initially contour tracing is done on the binary image and various components are obtained as a list.Then the list traversed to check the area of various components,if the area of the component is less than 200 pixel ,then mask is drawn over it,after this step erosion is done ,and thus small dots and noise is removed from the image.
+
+
+
+%The above mathematical operations are clarified using a
+%flowchart shown in Fig.5.
+
+
+
+\section{Results}
+\subsection{Dataset}
+The images of the drive datasets were obtained from the research website online used for retinal vessel extraction. Each image was captured using 8 bits per color plane at 768 by 584 pixels. The field of view (FOV) of each image is circular with a diameter of approximately 540 pixels. For this database, the images have been cropped around the FOV.The set of 40 images has been divided into a training and a test set, both containing 20 images. For the training images, a single manual segmentation of image is used.  
+\subsection{Implementation details}
+The implementation of the above methodology was done using opencv python. Firstly reading the image from the parent directory and applying the color scale conversion from BGR->GRAY and followed by Contrast Limited Adaptive Histogram Equalization(CLAHE) with grid size of around 8X8 to improve the contrast of the image. Series of morphological operations is applied with varying structuring Element size for the image. The image obtained after these operations is subtracted from the original enhanced contrast image and followed by binary threshold operation where minval is set to 15 and maxval is set to 255. Last step is applying the Contour watershed algorithm to identify boundary connected blood vessel for improving accuracy. 
+\subsection{Accuracy}
+Performance of segmentation of blood vessel is measured by calculating accuracy, Sensitivity and Specificity of the image. Parameters used for calculation are True Positive(TR), False Positive(FP), False Negative(FN) and False Poitive(FP).
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{CONTINGENCY VESSEL CLASSIFICATION}
+    \label{tab:table1}
+    \begin{tabular}{l|c|r} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+      \textbf{} & \textbf{Vessel Present} & \textbf{Vessel Absent}\\
+
+      \hline
+       &True Positive(TP) & False Positive(FP)\\
+       & False Negative(FN) & True Negative(TN)\\
+
+    \end{tabular}
+  \end{center}
+\end{table}
+
+Accuracy =  \(\frac{TN + TP}{TN + TP + FN +FP + 1 }\)\\
+
+Sensitivity = \(\frac{TP}{TP + FN + 1}\)\\
+
+Specificity = \(\frac{TN}{TN + FP + 1}\)\\
+
+Results are calculated by comparing each pixel value of segmented image to that of corresponding manual image in DRIVE dataset.If testing image pixel value is white and if the pixel value of both images match then True Positive(TP) gets incremented else it will increment False Negative (FN).
+If it is not white and stil matches then True negative (TN) will increment else False Positive (FP) will increase by one. This will done for all the pixel values. After calculating all the terms Accuracy, Sensitivity and Specificity will be calculated using the formula and results are displayed.
+
+
+
+
+% chart here
+%\end{enumerate}
+%oSubsubsection text here.
 
 
 % An example of a floating figure using the graphicx package.
@@ -521,7 +662,15 @@ Subsubsection text here.
 \section{Conclusion}
 The conclusion goes here.
 
-
+\begin{table}[]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{lll}
+PLP & PPV & ACCuracy \\
+5   & 3   & 5       
+\end{tabular}
+\end{table}
 
 
 % conference papers do not normally have an appendix
@@ -565,10 +714,31 @@ The authors would like to thank...
 H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
   0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
 
+\bibitem{IEEEhowto:Marin}
+ D. Marin, D., A. Aquino, M.E. Gegundez-Arias, J.M. Bravo,
+"A New Supervised Method for Blood Vessel Segmentation in
+Retinal Images by Using Gray-Level and Moment InvariantsBased
+Features," IEEE Trans. Med. Imag., vol.30, no.1, pp.146-
+158, Jan.2011.
+
+\bibitem{IEEEhowto:Walter}
+T. Walter, P. Massin, A. Erginay, R. Ordonez, C. Jeulin, and J.
+C. Klein, “Automatic detection of microaneurysms in color
+fundus images,” Med. Image Anal., vol. 11, pp. 555–566, 2007
+
+\bibitem{IEEEhowto:Hossain}
+ F. Hossain, M.R. Alsharif, "Image Enhancement Based on
+Logarithmic Transform Coefficient and Adaptive Histogram
+Equalization," Convergence Information Technology,
+International Conference on, pp.1439-1444, 21-23 Nov. 2007 
+
+\bibitem{IEEEhowto:Jitpakee}
+P. Jitpakdee, P. Aimmanee, B. Uyyanonvara, "A survey on
+hemorrhage detection in diabetic retinopathy retinal images,"
+Electrical Engineering/Electronics, Computer,
+Telecommunications and Information Technology (ECTI-CON)
+Conference, pp.1-4, 16-18 May 2012. 
 \end{thebibliography}
-
-
-
 
 % that's all folks
 \end{document}
