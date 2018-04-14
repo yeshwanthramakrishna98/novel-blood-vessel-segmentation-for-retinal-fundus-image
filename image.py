@@ -40,8 +40,9 @@ def calC_accuracy(result, label):
 
 if __name__ == "__main__":	
     i=0
-    image =cv2.imread("DRIVE/test/images/02_test.tif")
-    res =cv2.imread("DRIVE/test/test1/02_manual1.tiff")
+    image =cv2.imread("DRIVE/test/images/11_test.tif")
+    res =cv2.imread("DRIVE/test/test1/11_manual1.tiff")
+    path = "DRIVE/test/azxc/11.tiff"
     image = cv2.resize(image, (0, 0), None, .5, .5)
     asdfgh = image 
     #p=extract_bv(image)
@@ -111,6 +112,10 @@ if __name__ == "__main__":
     
     numpy_horizontal = np.hstack((green_fundus,contrast_enhanced_green_fundus,R4,f5, newfin,blood_vessels))
     cv2.imshow('Numpy Horizontal', numpy_horizontal)
+    
+    
+    
+    cv2.imwrite(str(path),numpy_horizontal)
 
     #cv2.imshow("p",p)
     #path = 'DRIVE/test/modified/'
