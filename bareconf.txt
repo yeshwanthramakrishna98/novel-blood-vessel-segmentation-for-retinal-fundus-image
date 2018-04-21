@@ -323,13 +323,16 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{OUR PROJECT}
+\title{A Novel Blood Vessel Segmentation Algorithm For Retina Fundus Images}
 
 
 % author names and affiliations
 % use a multiple column layout for up to three different
 % affiliations
-\author{\IEEEauthorblockN{Avinash Devadhar S}
+
+\author{
+
+\IEEEauthorblockN{Avinash Devadhar S}
 \IEEEauthorblockA{15co210\\Department of Computer Engineering\\
 NIT
 Surathkal , Mangalore 575025\\
@@ -339,12 +342,23 @@ Email: asdevadhar@gmail.com}
 \IEEEauthorblockA{Department of Computer Engineering\\
 NITk Surathkal , Mangalore 575025\\
 Email: tusharbs1997@gmail.com}
+
 \and
 \IEEEauthorblockN{Yeshwanth Ramakrishna}
 \IEEEauthorblockA{15co154\\Department of Computer Engineering\\
 NITk
 Surathkal , Mangalore 575025\\
-Email:yeshwanthr98@gmail.com}}
+Email:yeshwanthr98@gmail.com}
+\and
+\IEEEauthorblockN{{\hspace{100}}Shashidhar G Koolagudi}
+\IEEEauthorblockA{Assistant Professor\\Department of Computer Engineering\\
+NITk
+Surathkal , Mangalore 575025\\
+Email:.com}
+
+
+}
+
 
 % conference papers do not typically use \thanks and this command
 % is locked out in conference mode. If really needed, such as for
@@ -437,8 +451,6 @@ Another segmentation process includes segmentation of retinal vessels using the 
 Retinal segmentation based on reinforcement local description . A novel line set feature first captures local shape information about vessel by employing length prior of vessels. After that, local intensity feature is calculated for each pixel and morphological gradient feature is extracted for enhancing local edge of smaller vessel, finally line set based feature, local intensity feature and morphological gradient feature are combined to obtain the reinforcement local description.
 
 In this paper we present the idea of segmentation of retinal blood vessel using morphological operations and contour algorithm. The fundus image used in this research is obtained from Digital Retinal Images for Vessel Extraction(DRIVE dataset). Input to segmentation process is color fundus image and RGB image is converted to green channel image and morphological operations is used, lastly contour algorithm is applied on the image to get segmented image with accuracy averaging around 95\%.
-
-
 \section{Methodology}
 \subsection{Pre-processing}
 %Subsection text here.
@@ -459,9 +471,7 @@ a reference image for the segmentation process. Red and
 blue channels do not provide clear blood vessels due to the
 low contrast and poor dynamic range, respectively[3]
 \\
-\begin{figure}[]
-\includegraphics[width= \linewidth]{4.PNG}
-\end{figure}
+\includegraphics[width= \linewidth,height=6cm]{4.PNG}
 \\ 
 \textit{2) Green channel complement and adaptive histogram
 equalization:}\\
@@ -472,9 +482,9 @@ processing the entire image data, it processes small regions,
 individually[4].The AHE equalizes intensity levels by
 making vessels, including the small ones, clearer and whiter
 As a result, the image has a smoothed background.%
+\\
+\includegraphics[width= \linewidth]{5.PNG}
 \\ 
-
-  
 \subsection{Morphological operations}
 
 Morphological methodologies are collection of techniques
@@ -503,32 +513,33 @@ The blood vessels are suppressed by the successive
 result of the adaptive histogram equalizer, to obtain a
 normalized retinal image.
 Adaptive histogram equalization is  applied to the resultant image.
-\\
-\begin{figure}
-\includegraphics[width= \linewidth]{3.png}
-\caption{Series of opening and closing operations and subtraction}
-\end{figure}
 
-
+\includegraphics[width=\linewidth,height=13cm]{morpho_operations.png}
+\caption{Figure 2)Flowchart of the morphological operations}
 \subsection{Removal of non-connected components}
 Contour tracing is one of many  techniques performed on digital images in order to extract information about their general shape.\\
 Contour tracing is done to group the various connected components in the image, this data is again processed to check whether the components are blood vessels or whether it is noise ,and also non-connected components are removed.\\
-initially contour tracing is done on the binary image and various components are obtained as a list.Then the list traversed to check the area of various components,if the area of the component is less than 200 pixel ,then mask is drawn over it,after this step erosion is done ,and thus small dots and noise is removed from the image.
+initially contour tracing is done on the binary image,so simple fixed-level thresholding to convert the grayscale image to a binary image and various components are obtained as a list.Then the list traversed to check the area of various components,if the area of the component is less than 200 pixel ,then mask is drawn over it,after this step erosion is done ,and thus small dots and noise is removed from the image.
+\\
+After the above step, we are left with required blood vessels,noise with larger area and sometimes a thick circle around the image,these are removed by following the contour again and masking the components less than are 3000 pixels and finally removing the thick ring.
 
-
-
-%The above mathematical operations are clarified using a
-%flowchart shown in Fig.5.
-
-
+\includegraphics[width=6cm,height=10cm]{segmentation.png}
 
 \section{Results}
 \subsection{Dataset}
 The images of the drive datasets were obtained from the research website online used for retinal vessel extraction. Each image was captured using 8 bits per color plane at 768 by 584 pixels. The field of view (FOV) of each image is circular with a diameter of approximately 540 pixels. For this database, the images have been cropped around the FOV.The set of 40 images has been divided into a training and a test set, both containing 20 images. For the training images, a single manual segmentation of image is used.  
 \subsection{Implementation details}
 The implementation of the above methodology was done using opencv python. Firstly reading the image from the parent directory and applying the color scale conversion from BGR->GRAY and followed by Contrast Limited Adaptive Histogram Equalization(CLAHE) with grid size of around 8X8 to improve the contrast of the image. Series of morphological operations is applied with varying structuring Element size for the image. The image obtained after these operations is subtracted from the original enhanced contrast image and followed by binary threshold operation where minval is set to 15 and maxval is set to 255. Last step is applying the Contour watershed algorithm to identify boundary connected blood vessel for improving accuracy. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=20cm,height=10cm]{page1.png}
+\end{figure}
+
+
+
 \subsection{Accuracy}
-Performance of segmentation of blood vessel is measured by calculating accuracy, Sensitivity and Specificity of the image. Parameters used for calculation are True Positive(TR), False Positive(FP), False Negative(FN) and False Poitive(FP).
+Performance of segmentation of blood vessel is measured by calculating accuracy, Sensitivity and Specificity of the image. Parameters used for calculation are True Positive(TR), False Positive(FP), False Negative(FN) and False Positive(FP).
 
 \begin{table}[h!]
   \begin{center}
@@ -545,11 +556,13 @@ Performance of segmentation of blood vessel is measured by calculating accuracy,
   \end{center}
 \end{table}
 
-Accuracy =  \(\frac{TN + TP}{TN + TP + FN +FP + 1 }\)\\
+Accuracy =  \(\frac{TN + TP}{TN + TP + FN +FP + 1 }\)
 
 Sensitivity = \(\frac{TP}{TP + FN + 1}\)\\
 
 Specificity = \(\frac{TN}{TN + FP + 1}\)\\
+
+Dice Coefficient=\(\frac{2TP}{2TP+FP+FN}\)\\
 
 Results are calculated by comparing each pixel value of segmented image to that of corresponding manual image in DRIVE dataset.If testing image pixel value is white and if the pixel value of both images match then True Positive(TP) gets incremented else it will increment False Negative (FN).
 If it is not white and stil matches then True negative (TN) will increment else False Positive (FP) will increase by one. This will done for all the pixel values. After calculating all the terms Accuracy, Sensitivity and Specificity will be calculated using the formula and results are displayed.
@@ -560,6 +573,54 @@ If it is not white and stil matches then True negative (TN) will increment else 
 % chart here
 %\end{enumerate}
 %oSubsubsection text here.
+\subsection{Tabulation}
+\begin{table}[h!]
+\centering
+\caption{Algorithm performance result on drive dataset images}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+Image   & Accuracy & Sensitivity & Specificity & Dice-Coefficient \\ \hline
+1       & 0.954    & 0.642       & 0.989       & 0.742            \\ \hline
+2       & 0.9644   & 0.6255      & 0.9906      & 0.7158           \\ \hline
+3       & 0.9421   & 0.5063      & 0.9904      & 0.6359           \\ \hline
+4       & 0.9505   & 0.599       & 0.9861      & 0.6907           \\ \hline
+5       & 0.95     & 0.5214      & 0.9861      & 0.6618           \\ \hline
+6       & 0.9475   & 0.5078      & 0.9949      & 0.6534           \\ \hline
+7       & 0.9532   & 0.5566      & 0.992       & 0.6807           \\ \hline
+8       & 0.945    & 0.5185      & 0.9953      & 0.5662           \\ \hline
+9       & 0.9462   & 0.5088      & 0.9935      & 0.5777           \\ \hline
+10      & 0.9535   & 0.5071      & 0.9935      & 0.6423           \\ \hline
+11      & 0.9432   & 0.5382      & 0.984       & 0.6248           \\ \hline
+12      & 0.9461   & 0.5439      & 0.9937      & 0.5875           \\ \hline
+13      & 0.9476   & 0.529       & 0.9929      & 0.6639           \\ \hline
+14      & 0.9594   & 0.6477      & 0.9869      & 0.72             \\ \hline
+15      & 0.9499   & 0.5916      & 0.985       & 0.678            \\ \hline
+16      & 0.9535   & 0.6065      & 0.988       & 0.7023           \\ \hline
+17      & 0.9428   & 0.5028      & 0.9925      & 0.574            \\ \hline
+18      & 0.9524   & 0.5715      & 0.985       & 0.768            \\ \hline
+19      & 0.9639   & 0.6397      & 0.9932      & 0.756            \\ \hline
+20      & 0.9558   & 0.513       & 0.9909      & 0.6307           \\ \hline
+Average & 0.9510  & 0.55884    & 0.99017    & 0.66358         \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{Comparison Of Results With Other Methods}
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+Method          & Accuracy \\ \hline
+Staal{[}6{]}    & 0.9442   \\ \hline
+Mendonca{[}7{]} & 0.9463   \\ \hline
+Benson{[}8{]}   & 0.9472   \\ \hline
+Marin{[}9{]}    & 0.9452   \\ \hline
+Soares{[}10{]}  & 0.9428   \\ \hline
+Purnama{[}11{]} & 0.9421   \\ \hline
+Proposed Method & 0.9511   \\ \hline
+\end{tabular}
+\end{table}
 
 
 % An example of a floating figure using the graphicx package.
@@ -660,17 +721,8 @@ If it is not white and stil matches then True negative (TN) will increment else 
 
 
 \section{Conclusion}
-The conclusion goes here.
+We propose a retinal vessel segmentation method. Our results show that our method outperforms the other methods by achieving average 95.11\% accuracy. 96.64\% and 94.28\% are the highest and lowest accuracies achieved by our method. The results also state that the proposed method is robust enough that it will not require user interaction in analyzing different retinal images because of its good behavior against images of different conditions.
 
-\begin{table}[]
-\centering
-\caption{My caption}
-\label{my-label}
-\begin{tabular}{lll}
-PLP & PPV & ACCuracy \\
-5   & 3   & 5       
-\end{tabular}
-\end{table}
 
 
 % conference papers do not normally have an appendix
@@ -678,9 +730,8 @@ PLP & PPV & ACCuracy \\
 
 % use section* for acknowledgment
 \section*{Acknowledgment}
-
-
-The authors would like to thank...
+The authors would like to thank Staal et al. and Hoover et al.
+for their DRIVE database used in this research.The authors would also like to thank Shashidhar G koolagudi Assistant Professor Department Of Computer Science,NITK and Ramteke Pravin Bhaskar Research Scholar Department Of Computer Science,NITK fot their continued guidance and support.
 
 
 
@@ -738,6 +789,26 @@ hemorrhage detection in diabetic retinopathy retinal images,"
 Electrical Engineering/Electronics, Computer,
 Telecommunications and Information Technology (ECTI-CON)
 Conference, pp.1-4, 16-18 May 2012. 
+
+\bibitem{IEEEhowto:Staal}
+J. Staal, M. D. Abràmoff, M. Niemeijer, M. A. Viergever, and B. v.Ginneken, “Ridge based vessel segmentation in color images of the retina,” IEEE Trans. Med. Imag., vol. 23, no. 4, pp. 501–509, Apr. 2004.
+
+\bibitem{IEEEhowto:Mendonca}
+A. M. Mendonça and A. Campilho, “Segmentation of retinal blood vessels by combining the detection of centerlines and morphological reconstruction,” IEEE Trans. Med. Imag., vol. 25, no. 9, pp. 1200–1213,Sep. 2006.
+
+\bibitem{IEEEhowto:Benson}
+Benson S. Y. Lam*, Member, IEEE, Yongsheng Gao, Senior Member, IEEE, and Alan Wee-Chung Liew, Senior Member, IEEE "General Retinal Vessel Segmentation Using Regularization-Based Multiconcavity Modeling" IEEE TRANSACTIONS ON MEDICAL IMAGING, VOL. 29, NO. 7, JULY 2010
+
+\bibitem{IEEEhowto:Marin}
+D.Marin,  A. Aquino, M.E. Gegundez-Arias, J.M. Bravo, "A New Supervised Method for Blood Vessel Segmentation in Retinal Images by Using Gray-Level and Moment Invariants-Based Features," IEEE Trans. Med. Imag., vol.30, no.1, pp.146-158, Jan.2011.
+
+
+\bibitem{IEEEhowto:Soares}
+J. V. B. Soares, J. J. G. Leandro, R. M. Cesar, Jr., H. F. Jelinek, and M. J. Cree, “Retinal vessel segmentation using the 2D Gabor wavelet and supervised classification,” IEEE Trans. Med. Imag., vol. 25, no. 9, pp. 1214–1222, Sep. 2006.
+
+\bibitem{IEEEhowto:Purnama}
+I.K.E. Purnama1, K.Y.E. Aryanto "Branches Filtering Approach to Extract Retinal Blood Vessels in Fundus Image" International Conference on Instrumentation, Communication, Information Technology, and Biomedical Engineering 2009
+
 \end{thebibliography}
 
 % that's all folks
